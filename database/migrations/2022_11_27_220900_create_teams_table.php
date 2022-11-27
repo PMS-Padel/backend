@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreign('player1_id')->references('id')->on('users');
             $table->foreign('player2_id')->references('id')->on('users');
             $table->unique(['player1_id', 'player2_id']);
+            $table->softDeletes();
         });
     }
 

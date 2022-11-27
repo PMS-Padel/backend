@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('lng')->nullable();
             $table->string('file_url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
