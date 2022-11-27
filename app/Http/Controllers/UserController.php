@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendAccountVerificationEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,11 +56,13 @@ class UserController extends Controller
             ], 400);
         }
 
-        User::create([
+        $user = User::create([
             'email' => $request->email,
             'name' => $request->name,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->sendEmailVerificationNotification();
 
         return response()->json([
             'message' => 'Conta criada com sucesso',
