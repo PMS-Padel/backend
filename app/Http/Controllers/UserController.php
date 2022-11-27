@@ -49,7 +49,7 @@ class UserController extends Controller
 
         $userWithEmail = User::where('email', $request->email)->first();
 
-        if(isset($userWithEmail)) {
+        if (isset($userWithEmail)) {
             return response()->json([
                 'message' => 'Uma conta com este email existe',
             ], 400);
@@ -68,7 +68,7 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json([
             'message' => 'logged out',
