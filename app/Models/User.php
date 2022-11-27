@@ -44,4 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'birth_date' => 'date'
     ];
+
+    public function team() 
+    {
+        return $this->belongsToMany(Team::class);
+    }
 }
