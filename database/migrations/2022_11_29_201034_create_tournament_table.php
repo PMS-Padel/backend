@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('name');
             $table->date('init_date');
             $table->date('end_date');
-            $table->unsignedBigInteger('tournament_type');
+            $table->unsignedBigInteger('tournament_type_id');
             $table->string('file_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
 
-            //$table->foreign('tournament_type')->references('id')->on('tournament_type');
+            $table->foreign('tournament_type_id')->references('id')->on('tournament_types');
         });
     }
 
