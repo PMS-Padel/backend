@@ -35,9 +35,10 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8|max:30',
             'name' => 'string',
+            'gender' => 'string',
 
         ]);
 
@@ -48,7 +49,6 @@ class UserController extends Controller
             ], 400);
         }
 
-        $userWithEmail = User::where('email', $request->email)->first();
 
         if (isset($userWithEmail)) {
             return response()->json([
@@ -56,13 +56,21 @@ class UserController extends Controller
             ], 400);
         }
 
+        do {
+            $six_digit_random_number = random_int(100000, 999999);
+            $user = User::where('user_code', $six_digit_random_number) -> first();
+        } while (isset($user));
+
         $user = User::create([
-            'email' => $request->email,
-            'name' => $request->name,
-            'password' => Hash::make($request->password),
+            "email" => $request->email,
+            "name" => $request->name,
+            "password" => Hash::make($request->password),
+            "user_code" => $six_digit_random_number,
+            "role" => "player",
+            "gender" => $request->gender,
         ]);
 
-        $user->sendEmailVerificationNotification();
+        //$user->sendEmailVerificationNotification();
 
         return response()->json([
             'message' => 'Conta criada com sucesso',
