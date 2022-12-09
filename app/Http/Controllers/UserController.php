@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password')) && !Auth::attempt($request->only('username', 'password'))) {
+        if (!Auth::attempt($request->only('email', 'password','role')) && !Auth::attempt($request->only('username', 'password','role'))) {
             return response()->json([
                 'message' => __('auth.login_error'),
             ], 400);
