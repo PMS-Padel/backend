@@ -40,9 +40,28 @@ class TournamentController extends Controller
         ]);
 
         //$user->sendEmailVerificationNotification();
-
+        
         return response()->json([
             'message' => 'Torneio criado com sucesso',
         ], 200);
+    }
+
+    public function get_tournament(Request $request)
+    {
+        $tournament_id="";
+        if($request->has('id')){
+            $tournament_id = $request->id;
+        }
+        
+        if ($tournament_id=="")
+        {
+            return Tournament::query()->get();
+        }
+        else
+        {
+            return Tournament::query()->where('id', $tournament_id)->get();
+            //return $tournament_id;
+        }
+        
     }
 }
