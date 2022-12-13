@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Teams_restrictions extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'team_id',
         'restriction_id'
