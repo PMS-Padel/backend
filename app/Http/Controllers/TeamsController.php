@@ -15,8 +15,8 @@ class TeamsController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'subscription_date' => 'date'|'required',
-            'player1_id' => 'required',
-            'player2_id' => 'required'
+            'player1id' => 'required',
+            'player2id' => 'required'
         ]);
 
         if ($validation->fails()) {
@@ -30,13 +30,36 @@ class TeamsController extends Controller
             "name" => $request->name,
             "subscription_date" => $request->subscriptiondate,
             "player1_id" => $request->player1id,
-            "player2_id" => $request->player2id
+            "player2_id" => $request->player2id,
+            "payed"=> 'false'
         ]);
 
         //$user->sendEmailVerificationNotification();
         
         return response()->json([
             'message' => 'Equipa criada com sucesso',
+        ], 200);
+    }
+    public function set_Payed(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'teamid' => 'required',
+            'payed' => 'required'
+        ]);
+
+        if ($validation->fails()) {
+            return response()->json([
+                'errors' => $validation->errors(),
+                'message' => __('auth.wrong_format'),
+            ], 400);
+        }
+        
+        Team::where('id', $request->teamid )->update(['payed'=>$request->payed]);
+
+        //$user->sendEmailVerificationNotification();
+        
+        return response()->json([
+            'message' => 'Equipa atualizada com sucesso',
         ], 200);
     }
 }

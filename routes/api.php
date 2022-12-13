@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeamsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,4 +42,5 @@ Route::post('createtournament', [TournamentController::class, 'create_tournament
 Route::post('gettournaments', [TournamentController::class, 'get_tournament']);
 
 /***********EQUIPAS**********/
-Route::post('createteam', [TeamController::class, 'create_team']);
+Route::post('createteam', [TeamsController::class, 'create_team']);
+Route::post('setpayed', [TeamsController::class, 'set_payed']);
