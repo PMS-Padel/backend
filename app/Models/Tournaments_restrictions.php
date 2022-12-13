@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teams_restrictions extends Model
+class Tournaments_restrictions extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'team_id',
+        'tournament_id',
         'restriction_id'
     ];
 }
