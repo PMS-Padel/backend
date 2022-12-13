@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -28,8 +29,16 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
     return 'verified';
 })->name('verification.verify');
+
+//**********TORNEIOS********/
+Route::post('createtournament', [TournamentController::class, 'create_tournament']);
+Route::post('gettournaments', [TournamentController::class, 'get_tournament']);
+
+/***********EQUIPAS**********/
+Route::post('createteam', [TeamController::class, 'create_team']);
