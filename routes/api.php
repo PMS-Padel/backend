@@ -39,3 +39,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 //**********TORNEIOS********/
 Route::post('createtournament', [TournamentController::class, 'create_tournament']);
 Route::post('gettournaments', [TournamentController::class, 'get_tournament']);
+
+/***********EQUIPAS**********/
+Route::post('createteam', [TeamController::class, 'create_team']);
