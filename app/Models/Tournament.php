@@ -17,7 +17,7 @@ class Tournament extends Model
         'location',
         'price',
         'max_players',
-        'tournament_type',
+        'tournament_type_id',
         'file_url',
     ];
 }

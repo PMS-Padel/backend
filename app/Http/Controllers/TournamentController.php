@@ -31,7 +31,7 @@ class TournamentController extends Controller
 
         $tournament = Tournament::create([
             "name" => $request->name,
-            "tournament_type" => $request->tournamenttype,
+            "tournament_type_id" => $request->tournamenttype,
             "init_date" => $request->initdate,
             "end_date" => $request->enddate,
             "file_url" => $request->fileurl,
