@@ -11,9 +11,13 @@ class Tournament extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'init_date',
         'end_date',
-        'tournament_type_id',
-        'file_url'
+        'location',
+        'price',
+        'max_players',
+        'tournament_type',
+        'file_url',
     ];
 }
