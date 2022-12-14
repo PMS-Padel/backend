@@ -23,11 +23,13 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->decimal('price', 8, 2, true)->nullable();
             $table->integer('max_players');
-            $table->enum("tournament_type", ["Masculino", "Feminino", "Misto"]);
+            $table->unsignedBigInteger('tournament_type_id');
             $table->string('file_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
+            
+            $table->foreign('tournament_type_id')->references('id')->on('tournament_types');
         });
     }
 

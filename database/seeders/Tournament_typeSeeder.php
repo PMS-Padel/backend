@@ -17,13 +17,13 @@ class Tournament_typeSeeder extends Seeder
     {
         //
         Tournament_type::create([
-            'name' => 'Femeninos',
+            'name' => 'Feminino',
         ]);
         Tournament_type::create([
-            'name' => 'Masculinos',
+            'name' => 'Masculino',
         ]);
         Tournament_type::create([
-            'name' => 'Mistos',
+            'name' => 'Misto',
         ]);
     }
 }
