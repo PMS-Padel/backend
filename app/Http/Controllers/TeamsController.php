@@ -42,6 +42,8 @@ class TeamsController extends Controller
     }
     public function set_Payed(Request $request)
     {
+
+        //$token = $request->bearerToken(); todo: verificar o token
         $validation = Validator::make($request->all(), [
             'teamid' => 'required',
             'payed' => 'required'
