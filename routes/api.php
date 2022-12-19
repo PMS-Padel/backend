@@ -25,23 +25,24 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('logout', [UserController::class, 'logout']);
+
+    //**********TORNEIOS********/
+    Route::post('createtournament', [TournamentController::class, 'create_tournament']);
+
+
+    /***********EQUIPAS**********/
+    Route::post('createteam', [TeamsController::class, 'create_team']);
+    Route::post('setpayed', [TeamsController::class, 'set_payed']);
 });
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return 'verified';
 })->name('verification.verify');
 
-//**********TORNEIOS********/
-Route::post('createtournament', [TournamentController::class, 'create_tournament']);
 Route::get('gettournaments', [TournamentController::class, 'get_tournaments']);
 Route::get('gettournament/{id}', [TournamentController::class, 'get_tournament']);
-
-/***********EQUIPAS**********/
-Route::post('createteam', [TeamsController::class, 'create_team']);
-Route::post('setpayed', [TeamsController::class, 'set_payed']);
