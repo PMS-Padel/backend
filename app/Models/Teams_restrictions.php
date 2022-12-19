@@ -13,4 +13,5 @@ class Teams_restrictions extends Model
         'teams_id',
         'restriction_id'
        ];
+
 }
