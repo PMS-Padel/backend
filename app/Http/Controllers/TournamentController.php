@@ -52,12 +52,12 @@ class TournamentController extends Controller
     public function get_tournament($id)
     {
         $tournament = Tournament::findOrFail($id);
+        return $tournament;
     }
 
     public function get_tournaments(Request $request)
     {
         $data =  Tournament::all();
-
         return $data;
     }
 }
