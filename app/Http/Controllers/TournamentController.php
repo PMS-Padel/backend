@@ -12,10 +12,14 @@ class TournamentController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
-            'tournamenttype' => 'required',
+            'description' => 'string',
             'init_date' => 'date',
             'end_date' => 'date',
-
+            'location' => 'string',
+            'price' => 'numeric',
+            'maxplayers' => 'integer',
+            'tournamenttype' => 'required',
+            //'fileurl' => '',
         ]);
 
         if ($validation->fails()) {
@@ -25,18 +29,16 @@ class TournamentController extends Controller
             ], 400);
         }
 
-        $url="";
-        if($request->has('fileurl')){
-            $url = $request->fileurl;
-         }
-
-
         $tournament = Tournament::create([
             "name" => $request->name,
             "tournament_type_id" => $request->tournamenttype,
             "init_date" => $request->initdate,
             "end_date" => $request->enddate,
-            "file_url" => $url
+            "file_url" => $request->fileurl,
+            "description" => $request->description,
+            "location" => $request->location,
+            "price" => $request->price,
+            "max_players" => $request->maxplayers,
         ]);
 
         //$user->sendEmailVerificationNotification();
