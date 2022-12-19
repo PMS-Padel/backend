@@ -67,6 +67,13 @@ class TournamentController extends Controller
         
     }
 
+    public function get_tournament(Request $request, $id)
+    {
+        //get tournament id
+        $data =  Tournament::findOrFail($id);
+
+        return $data;
+    }
 
     
 }
