@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -42,38 +43,21 @@ class TournamentController extends Controller
         ]);
 
         //$user->sendEmailVerificationNotification();
-        
+
         return response()->json([
             'message' => 'Torneio criado com sucesso',
         ], 200);
     }
 
-    public function get_tournament(Request $request)
+    public function get_tournament($id)
     {
-        $tournament_id="";
-        if($request->has('id')){
-            $tournament_id = $request->id;
-        }
-        
-        if ($tournament_id=="")
-        {
-            return Tournament::query()->get();
-        }
-        else
-        {
-            return Tournament::query()->where('id', $tournament_id)->get();
-            //return $tournament_id;
-        }
-        
+        $tournament = Tournament::findOrFail($id);
+        return $tournament;
     }
 
-    public function get_tournament(Request $request, $id)
+    public function get_tournaments(Request $request)
     {
-        //get tournament id
-        $data =  Tournament::findOrFail($id);
-
+        $data =  Tournament::all();
         return $data;
     }
-
-    
 }
