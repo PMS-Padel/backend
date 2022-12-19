@@ -40,26 +40,4 @@ class TeamsController extends Controller
             'message' => 'Equipa criada com sucesso',
         ], 200);
     }
-    public function set_Payed(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'teamid' => 'required',
-            'payed' => 'required'
-        ]);
-
-        if ($validation->fails()) {
-            return response()->json([
-                'errors' => $validation->errors(),
-                'message' => __('auth.wrong_format'),
-            ], 400);
-        }
-        
-        Team::where('id', $request->teamid )->update(['payed'=>$request->payed]);
-
-        //$user->sendEmailVerificationNotification();
-        
-        return response()->json([
-            'message' => 'Equipa atualizada com sucesso',
-        ], 200);
-    }
 }
