@@ -88,7 +88,7 @@ class UserController extends Controller
         if (isset($request->password)){$user->password= Hash::make ($request->password);}
         if (isset($request->gender )){$user->gender= $request->gender;}
     
-
+        
         $user->save();
         
         return response()->json([
