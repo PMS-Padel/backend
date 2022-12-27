@@ -80,11 +80,20 @@ class UserController extends Controller
 
     public function update (Request $request)
     {
+        
         $user = Auth::user();
-        $user->name = $request->input("name");
-        $user->email = $request -> input("email");
-        $user->password = Hash::make($request->input("Password"));
-        $user->gender = $request->input("gender");    
+        $user = User::findOrFail($user->id);
+        if (isset($request->name)){$user->name= $request->name;}
+        if (isset($request->email)){$user->email= $request->email;}
+        if (isset($request->password)){$user->password= Hash::make ($request->password);}
+        if (isset($request->gender )){$user->gender= $request->gender;}
+    
+
+        $user->save();
+        
+        return response()->json([
+            'message' => 'Informação do utilizador atualizada com sucesso',
+        ], 200);
     }
 
     public function logout(Request $request)
