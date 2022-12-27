@@ -40,4 +40,22 @@ class TeamsController extends Controller
             'message' => 'Equipa criada com sucesso',
         ], 200);
     }
+
+    public function update_team(Request $request)
+    {
+
+        $team = Team::findOrFail($request->id);
+
+
+        if (isset($request->name)){$team->name= $request->name;}
+        if (isset($request->subscription_date)){$team->subscription_date= $request->subscription_date;}
+        if (isset($request->player1_id)){$team->player1_id= $request->player1_id;}
+        if (isset($request->player2_id )){$team->player2_id= $request->player2_id;}
+        if (isset($request->payed)){$team->payed= $request->payed;}
+
+        $team->save();
+        return response()->json([
+            'message' => 'Equipa actualizada com sucesso',
+        ], 200);
+    }
 }
