@@ -78,6 +78,15 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function update (Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->input("name");
+        $user->email = $request -> input("email");
+        $user->password = Hash::make($request->input("Password"));
+        $user->gender = $request->input("gender");    
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
