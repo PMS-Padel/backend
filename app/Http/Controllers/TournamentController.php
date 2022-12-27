@@ -58,24 +58,38 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::findOrFail($request->id);
 
-      
-            if (isset($request->name)){$tournament->name= $request->name;}
-            if (isset($request->description)){$tournament->description= $request->description;}
-            if (isset($request->init_date)){$tournament->init_date= $request->init_date;}
-            if (isset($request->end_date )){$tournament->end_date= $request->end_date;}
-            if (isset($request->price)){$tournament->price= $request->price;}
-            if (isset($request->location)){$tournament->location= $request->location;}
-            if (isset($request->maxplayers)){$tournament->maxplayers= $request->maxplayers;}
-            if (isset($request->tournamenttype)){$tournament->tournamenttype= $request->tournamenttype;}
-        
 
-            $tournament->save();
-            
-            return response()->json([
-                'message' => 'Torneio modificado',
-            ], 200);
-      
-        
+        if (isset($request->name)) {
+            $tournament->name = $request->name;
+        }
+        if (isset($request->description)) {
+            $tournament->description = $request->description;
+        }
+        if (isset($request->init_date)) {
+            $tournament->init_date = $request->init_date;
+        }
+        if (isset($request->end_date)) {
+            $tournament->end_date = $request->end_date;
+        }
+        if (isset($request->price)) {
+            $tournament->price = $request->price;
+        }
+        if (isset($request->location)) {
+            $tournament->location = $request->location;
+        }
+        if (isset($request->maxplayers)) {
+            $tournament->maxplayers = $request->maxplayers;
+        }
+        if (isset($request->tournamenttype)) {
+            $tournament->tournamenttype = $request->tournamenttype;
+        }
+
+
+        $tournament->save();
+
+        return response()->json([
+            'message' => 'Torneio modificado',
+        ], 200);
     }
     public function get_tournaments(Request $request)
     {
