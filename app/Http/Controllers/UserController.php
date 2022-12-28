@@ -82,11 +82,13 @@ class UserController extends Controller
     {
         
         $user = Auth::user();
-        $user = User::findOrFail($user->user_code);
+        $user = User::findOrFail($user->id);
         if (isset($request->name)){$user->name= $request->name;}
         if (isset($request->email)){$user->email= $request->email;}
         if (isset($request->password)){$user->password= Hash::make ($request->password);}
         if (isset($request->gender )){$user->gender= $request->gender;}
+        if (isset($request->phone_number)){$user->phone_number= $request->phone_number;}
+        if (isset($request->birth_date)){$user->birth_date= $request->birth_date;}
     
         
         $user->save();
