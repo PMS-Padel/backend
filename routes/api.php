@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
-
+Route::post('update', [UserController::class, 'update']);
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
