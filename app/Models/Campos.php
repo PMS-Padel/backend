@@ -11,8 +11,9 @@ class Campos extends Model
 
     protected $fillable = [
         'Campo_id',
-        'Hora_id',
-        'Dia_id',
+        'start_at',
+        'team_id1',
+        'team_id2',
         //'Availability', ?
         
        ];
