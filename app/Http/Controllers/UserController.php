@@ -82,7 +82,7 @@ class UserController extends Controller
     {
         
         $user = Auth::user();
-        $user = User::findOrFail($user->id);
+        $user = User::findOrFail($user->user_code);
         if (isset($request->name)){$user->name= $request->name;}
         if (isset($request->email)){$user->email= $request->email;}
         if (isset($request->password)){$user->password= Hash::make ($request->password);}
