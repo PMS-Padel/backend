@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /***********EQUIPAS**********/
     Route::post('createteam', [TeamsController::class, 'create_team']);
+    Route::post('updateteam', [TeamsController::class, 'update_team']);
     Route::post('setpayed', [TeamsController::class, 'set_payed']);
 });
 
