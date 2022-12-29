@@ -40,7 +40,7 @@ class TournamentController extends Controller
             "description" => $request->description,
             "location" => $request->location,
             "price" => $request->price,
-            "max_players" => $request->maxplayers,~
+            "max_players" => $request->maxplayers,
             "user_id" => $request->userid,
         ]);
 
