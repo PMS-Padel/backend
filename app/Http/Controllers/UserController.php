@@ -83,9 +83,15 @@ class UserController extends Controller
         
         $user = Auth::user();
         $user = User::findOrFail($user->id);
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => __('auth.wrong_format'),
+            ], 400);
+        }
+
         if (isset($request->name)){$user->name= $request->name;}
         if (isset($request->email)){$user->email= $request->email;}
-        if (isset($request->password)){$user->password= Hash::make ($request->password);}
+        //if (isset($request->password)){$user->password= Hash::make ($request->password);}
         if (isset($request->gender )){$user->gender= $request->gender;}
         if (isset($request->phone_number)){$user->phone_number= $request->phone_number;}
         if (isset($request->birth_date)){$user->birth_date= $request->birth_date;}
