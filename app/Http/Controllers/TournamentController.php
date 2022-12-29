@@ -20,7 +20,7 @@ class TournamentController extends Controller
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
-            'user_id' => 'required',
+            //'user_id' => 'required',
             //'fileurl' => '',
         ]);
 
