@@ -16,7 +16,8 @@ class TeamsController extends Controller
             'name' => 'required',
             'subscription_date' => 'date'|'required',
             'player1id' => 'required',
-            'player2id' => 'required'
+            'player2id' => 'required',
+            'tournament_id' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -31,6 +32,7 @@ class TeamsController extends Controller
             "subscription_date" => $request->subscriptiondate,
             "player1_id" => $request->player1id,
             "player2_id" => $request->player2id,
+            "tournament_id" => $request->tournamentid,
             "payed"=> 'false'
         ]);
 
@@ -51,6 +53,7 @@ class TeamsController extends Controller
         if (isset($request->subscription_date)){$team->subscription_date= $request->subscription_date;}
         if (isset($request->player1_id)){$team->player1_id= $request->player1_id;}
         if (isset($request->player2_id )){$team->player2_id= $request->player2_id;}
+        if (isset($request->tournament_id )){$team->player2_id= $request->tournament_id;}
         if (isset($request->payed)){$team->payed= $request->payed;}
 
         $team->save();
