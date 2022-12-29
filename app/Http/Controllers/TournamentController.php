@@ -20,6 +20,7 @@ class TournamentController extends Controller
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
+            'user_id' => 'required',
             //'fileurl' => '',
         ]);
 
@@ -39,7 +40,8 @@ class TournamentController extends Controller
             "description" => $request->description,
             "location" => $request->location,
             "price" => $request->price,
-            "max_players" => $request->maxplayers,
+            "max_players" => $request->maxplayers,~
+            "user_id" => $request->userid,
         ]);
 
         //$user->sendEmailVerificationNotification();

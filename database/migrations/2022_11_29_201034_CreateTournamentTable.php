@@ -24,12 +24,14 @@ return new class extends Migration
             $table->decimal('price', 8, 2, true)->nullable();
             $table->integer('max_players');
             $table->unsignedBigInteger('tournament_type_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('file_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             
             $table->foreign('tournament_type_id')->references('id')->on('tournament_types');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
