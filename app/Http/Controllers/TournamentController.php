@@ -101,6 +101,22 @@ class TournamentController extends Controller
     public function get_tournaments(Request $request)
     {
         $data =  Tournament::all();
+        
+        
         return $data;
     }
+
+    public function update_TournamentImage(Request $request) {
+        
+        $tournament = Tournament::findOrFail($request->id);
+
+        $file = $request->file('image');
+        $tournament->file_url = $request->file('image')->store('images');
+
+        $tournament->save();
+        
+        return response()->json([
+            'message' => 'Torneio modificado',
+        ], 200);
+     }
 }

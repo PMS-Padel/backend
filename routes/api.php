@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //**********TORNEIOS********/
     Route::post('createtournament', [TournamentController::class, 'create_tournament']);
     Route::post('updatetournament', [TournamentController::class, 'update_tournament']);
-
+    Route::post('updateImagetournament', [TournamentController::class, 'update_TournamentImage']);
     /***********EQUIPAS**********/
     Route::post('createteam', [TeamsController::class, 'create_team']);
     Route::post('updateteam', [TeamsController::class, 'update_team']);
