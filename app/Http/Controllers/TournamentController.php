@@ -82,10 +82,10 @@ class TournamentController extends Controller
             $tournament->location = $request->location;
         }
         if (isset($request->maxplayers)) {
-            $tournament->maxplayers = $request->maxplayers;
+            $tournament->max_players = $request->maxplayers;
         }
         if (isset($request->tournamenttype)) {
-            $tournament->tournamenttype = $request->tournamenttype;
+            $tournament->tournament_type_id = $request->tournamenttype;
         }
         if (isset($request->insurance)) {
             $tournament->seguro = $request->insurance;
