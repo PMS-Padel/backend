@@ -20,6 +20,7 @@ class TournamentController extends Controller
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
+            'seguro' => 'string'
             //'fileurl' => '',
         ]);
 
@@ -40,6 +41,8 @@ class TournamentController extends Controller
             "location" => $request->location,
             "price" => $request->price,
             "max_players" => $request->maxplayers,
+            "seguro" => $request->seguro,
+
         ]);
 
         //$user->sendEmailVerificationNotification();
@@ -82,6 +85,9 @@ class TournamentController extends Controller
         }
         if (isset($request->tournamenttype)) {
             $tournament->tournamenttype = $request->tournamenttype;
+        }
+        if  (isset($request->seguro)) {
+            $tournament->seguro = $request->seguro;
         }
 
 

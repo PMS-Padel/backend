@@ -22,6 +22,7 @@ class TournamentSeeder extends Seeder
             'end_date' => Carbon::now(),
             'max_players' => 10,
             'tournament_type_id' => 3,
+            'seguro'=> 'Atual',
         ]);
     }
 }

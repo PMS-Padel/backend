@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('max_players');
             $table->unsignedBigInteger('tournament_type_id');
             $table->string('file_url')->nullable();
+            $table->string('seguro')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

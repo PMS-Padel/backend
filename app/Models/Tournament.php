@@ -19,5 +19,6 @@ class Tournament extends Model
         'max_players',
         'tournament_type_id',
         'file_url',
+        'seguro',
     ];
 }
