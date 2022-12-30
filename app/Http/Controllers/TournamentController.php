@@ -14,14 +14,14 @@ class TournamentController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'string',
-            'init_date' => 'date',
-            'end_date' => 'date',
-            'location' => 'string',
+            'init_date' => 'date'|'required',
+            'end_date' => 'date'|'required',
+            'location' => 'string'|'required',
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
             //'user_id' => 'required',
-            //'fileurl' => '',
+            'fileurl' => 'required',
         ]);
 
         if ($validation->fails()) {
