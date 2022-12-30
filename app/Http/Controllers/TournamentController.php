@@ -16,12 +16,12 @@ class TournamentController extends Controller
             'description' => 'string',
             'init_date' => 'date'|'required',
             'end_date' => 'date'|'required',
-            'location' => 'string'|'required',
+            'location' => 'required',
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
             //'user_id' => 'required',
-            'seguro' => 'string',
+            'insurance' => 'string',
             'fileurl' => 'required',
         ]);
 
@@ -42,7 +42,7 @@ class TournamentController extends Controller
             "location" => $request->location,
             "price" => $request->price,
             "max_players" => $request->maxplayers,
-            "seguro" => $request->seguro,
+            "seguro" => $request->insurance,
             "user_id" => $request->userid,
         ]);
 
@@ -87,8 +87,8 @@ class TournamentController extends Controller
         if (isset($request->tournamenttype)) {
             $tournament->tournamenttype = $request->tournamenttype;
         }
-        if (isset($request->seguro)) {
-            $tournament->seguro = $request->seguro;
+        if (isset($request->insurance)) {
+            $tournament->seguro = $request->insurance;
         }
 
 
@@ -100,7 +100,7 @@ class TournamentController extends Controller
     }
     public function get_tournaments(Request $request)
     {
-        $data =  Tournament::all();
+        $data = Tournament::all();
         return $data;
     }
 }
