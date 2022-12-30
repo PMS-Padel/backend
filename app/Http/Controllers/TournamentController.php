@@ -21,6 +21,7 @@ class TournamentController extends Controller
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
             //'user_id' => 'required',
+            'seguro' => 'string',
             'fileurl' => 'required',
         ]);
 
@@ -41,6 +42,7 @@ class TournamentController extends Controller
             "location" => $request->location,
             "price" => $request->price,
             "max_players" => $request->maxplayers,
+            "seguro" => $request->seguro,
             "user_id" => $request->userid,
         ]);
 
@@ -84,6 +86,9 @@ class TournamentController extends Controller
         }
         if (isset($request->tournamenttype)) {
             $tournament->tournamenttype = $request->tournamenttype;
+        }
+        if (isset($request->seguro)) {
+            $tournament->seguro = $request->seguro;
         }
 
 

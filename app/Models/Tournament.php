@@ -20,5 +20,6 @@ class Tournament extends Model
         'tournament_type_id',
         'user_id',
         'file_url',
+        'seguro',
     ];
 }
