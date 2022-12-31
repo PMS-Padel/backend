@@ -16,11 +16,12 @@ class TournamentController extends Controller
             'description' => 'string',
             'init_date' => 'date'|'required',
             'end_date' => 'date'|'required',
-            'location' => 'string'|'required',
+            'location' => 'required',
             'price' => 'numeric',
             'maxplayers' => 'integer',
             'tournamenttype' => 'required',
             //'user_id' => 'required',
+            'insurance' => 'string',
             'fileurl' => 'required',
         ]);
 
@@ -41,6 +42,7 @@ class TournamentController extends Controller
             "location" => $request->location,
             "price" => $request->price,
             "max_players" => $request->maxplayers,
+            "seguro" => $request->insurance,
             "user_id" => $request->userid,
         ]);
 
@@ -80,10 +82,13 @@ class TournamentController extends Controller
             $tournament->location = $request->location;
         }
         if (isset($request->maxplayers)) {
-            $tournament->maxplayers = $request->maxplayers;
+            $tournament->max_players = $request->maxplayers;
         }
         if (isset($request->tournamenttype)) {
-            $tournament->tournamenttype = $request->tournamenttype;
+            $tournament->tournament_type_id = $request->tournamenttype;
+        }
+        if (isset($request->insurance)) {
+            $tournament->seguro = $request->insurance;
         }
 
 
@@ -96,6 +101,22 @@ class TournamentController extends Controller
     public function get_tournaments(Request $request)
     {
         $data =  Tournament::all();
+        
+        
         return $data;
     }
+
+    public function update_TournamentImage(Request $request) {
+        
+        $tournament = Tournament::findOrFail($request->id);
+
+        $file = $request->file('image');
+        $tournament->file_url = $request->file('image')->store('images');
+
+        $tournament->save();
+        
+        return response()->json([
+            'message' => 'Torneio modificado',
+        ], 200);
+     }
 }

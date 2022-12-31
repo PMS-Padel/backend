@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,41 @@ class TeamsController extends Controller
             'message' => 'Equipa criada com sucesso',
         ], 200);
     }
+    public function create_teamByCode(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'name' => 'required',
+            'subscription_date' => 'date'|'required',
+            'player1Code' => 'required',
+            'player2Code' => 'required',
+            'tournament_id' => 'required',
+        ]);
 
+        if ($validation->fails()) {
+            return response()->json([
+                'errors' => $validation->errors(),
+                'message' => __('auth.wrong_format'),
+            ], 400);
+        }
+
+        $player1= User::where('user_code', '=', $request->player1Code)->firstOrFail();
+        $player2= User::where('user_code', '=', $request->player2Code)->firstOrFail();
+
+        $team = Team::create([
+            "name" => $request->name,
+            "subscription_date" => $request->subscriptiondate,
+            "player1_id" => $player1->id,
+            "player2_id" => $player2->id,
+            "tournament_id" => $request->tournamentid,
+            "payed"=> 'false'
+        ]);
+
+        //$user->sendEmailVerificationNotification();
+        
+        return response()->json([
+            'message' => 'Equipa criada com sucesso',
+        ], 200);
+    }
     public function update_team(Request $request)
     {
 
