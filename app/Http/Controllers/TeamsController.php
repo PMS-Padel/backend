@@ -80,20 +80,47 @@ class TeamsController extends Controller
     }
     public function update_team(Request $request)
     {
-
         $team = Team::findOrFail($request->id);
-
+        $partner = User::where('user_code', '=', $request->player2Code)->first();
 
         if (isset($request->name)){$team->name= $request->name;}
-        if (isset($request->subscription_date)){$team->subscription_date= $request->subscription_date;}
+        if (isset($request->subscriptiondate)){$team->subscription_date= $request->subscriptiondate;}
         if (isset($request->player1_id)){$team->player1_id= $request->player1_id;}
-        if (isset($request->player2_id )){$team->player2_id= $request->player2_id;}
-        if (isset($request->tournament_id )){$team->player2_id= $request->tournament_id;}
+        if (isset($partner)){$team->player2_id= $partner->id;}
+        if (isset($request->tournamentid)){$team->tournament_id= $request->tournamentid;}
         if (isset($request->payed)){$team->payed= $request->payed;}
 
         $team->save();
         return response()->json([
             'message' => 'Equipa actualizada com sucesso',
         ], 200);
+    }
+
+    public function is_teammate(Request $request)
+    {
+        $player1 = Team::where('player1_id', '=', $request->playerid)->first();
+        $player2 = Team::where('player2_id', '=', $request->playerid)->first();
+
+        if (isset($request->tournamentid))
+        {
+            $player1 = Team::where([['player1_id', '=', $request->playerid],
+            ['tournament_id', '=', $request->tournamentid]])->first();
+            $player2 = Team::where([['player2_id', '=', $request->playerid],
+            ['tournament_id', '=', $request->tournamentid]])->first();
+        }
+
+        $httpMessage = ($player1 === null && $player2 === null) ? 'Não esta numa equipa' : 'Esta numa equipa';
+        $httpCode = ($player1 === null && $player2 === null) ? 400 : 200;
+
+        if($httpCode == 200 && isset($request->tournamentid))
+        {
+            return $player1 ?? $player2;
+        }
+        else
+        {
+            return response()->json([
+                'message' => $httpMessage,
+            ], $httpCode);
+        }
     }
 }
