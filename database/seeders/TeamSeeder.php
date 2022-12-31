@@ -20,9 +20,9 @@ class TeamSeeder extends Seeder
         Team::create([
             'name' => 'Nome Equipa',
             'subscription_date' => Carbon::now(),
-            'player1_id' => '1',
-            'player2_id' => '2',
-            'tournament_id' => '1',
+            'player1_id' => 1,
+            'player2_id' => 2,
+            'tournament_id' => 1,
             'payed' => "false",
 
         ]);
