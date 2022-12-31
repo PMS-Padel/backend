@@ -22,7 +22,7 @@ class TeamSeeder extends Seeder
             'subscription_date' => Carbon::now(),
             'player1_id' => '1',
             'player2_id' => '2',
-            'tournament_id' => '3',
+            'tournament_id' => '1',
             'payed' => "false",
 
         ]);
