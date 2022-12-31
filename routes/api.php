@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('update', [UserController::class, 'update']);
     Route::post('logout', [UserController::class, 'logout']);
+    Route::post('getByCode', [UserController::class, 'get_user_by_code']);
 
     //**********TORNEIOS********/
     Route::post('createtournament', [TournamentController::class, 'create_tournament']);

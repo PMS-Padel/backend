@@ -78,9 +78,8 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function update (Request $request)
+    public function update(Request $request)
     {
-        
         $user = Auth::user();
         $user = User::findOrFail($user->id);
         if (!Hash::check($request->password, $user->password)) {
@@ -102,6 +101,12 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Informação do utilizador atualizada com sucesso',
         ], 200);
+    }
+
+    public function get_user_by_code(Request $request)
+    {
+        $partner = User::where('user_code', '=', $request->user_code)->firstOrFail();
+        return $partner;
     }
 
     public function logout(Request $request)

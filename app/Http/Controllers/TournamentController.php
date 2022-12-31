@@ -62,7 +62,6 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::findOrFail($request->id);
 
-
         if (isset($request->name)) {
             $tournament->name = $request->name;
         }
@@ -91,7 +90,6 @@ class TournamentController extends Controller
             $tournament->seguro = $request->insurance;
         }
 
-
         $tournament->save();
 
         return response()->json([
@@ -100,9 +98,7 @@ class TournamentController extends Controller
     }
     public function get_tournaments(Request $request)
     {
-        $data =  Tournament::all();
-        
-        
+        $data = Tournament::all();
         return $data;
     }
 
