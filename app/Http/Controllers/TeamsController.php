@@ -47,10 +47,10 @@ class TeamsController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required',
-            'subscription_date' => 'date'|'required',
+            'subscriptiondate' => 'date',
             'player1Code' => 'required',
             'player2Code' => 'required',
-            'tournament_id' => 'required',
+            'tournamentid' => 'required',
         ]);
 
         if ($validation->fails()) {
