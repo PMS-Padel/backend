@@ -23,7 +23,7 @@ class TeamSeeder extends Seeder
             'player1_id' => 1,
             'player2_id' => 2,
             'tournament_id' => 3,
-            'payed' => "falso",
+            'payed' => "false",
 
         ]);
     }
