@@ -51,3 +51,5 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::get('gettournaments', [TournamentController::class, 'get_tournaments']);
 Route::get('gettournament/{id}', [TournamentController::class, 'get_tournament']);
+
+Route::get('getteams/{tournament_id}', [TeamsController::class, 'get_teams']);

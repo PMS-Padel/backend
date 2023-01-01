@@ -123,4 +123,10 @@ class TeamsController extends Controller
             ], $httpCode);
         }
     }
+
+    public function get_teams($tournament_id)
+    {
+        $team = Team::findOrFail($tournament_id);
+        return $team;
+    }
 }
