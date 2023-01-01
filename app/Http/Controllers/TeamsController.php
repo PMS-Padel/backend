@@ -124,9 +124,9 @@ class TeamsController extends Controller
         }
     }
 
-    public function get_teams($tournament_id)
+    public function get_teams(Request $request)
     {
-        $team = Team::findOrFail($tournament_id);
-        return $team;
+        $teams = Team::where('tournament_id', $request->tournament_id)->get();
+        return $teams;
     }
 }
