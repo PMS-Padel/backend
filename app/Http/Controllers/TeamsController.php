@@ -63,6 +63,17 @@ class TeamsController extends Controller
         $player1= User::where('user_code', '=', $request->player1Code)->firstOrFail();
         $player2= User::where('user_code', '=', $request->player2Code)->firstOrFail();
 
+        //Verificar se parceiro esta numa equipa do mesmo torneio
+        $isPlayer2OnAnotherTeam = Team::where([['player1_id', '=', $player2->id],['tournament_id', '=', $request->tournamentid]])->first();
+        $isPlayer2OnAnotherTeamid2 = Team::where([['player2_id', '=', $player2->id],['tournament_id', '=', $request->tournamentid]])->first();
+
+        if ($isPlayer2OnAnotherTeam != null || $isPlayer2OnAnotherTeamid2 != null) {
+            return response()->json([
+                'errors' => $validation->errors(),
+                'message' => __('auth.wrong_format'),
+            ], 400);
+        }
+
         $team = Team::create([
             "name" => $request->name,
             "subscription_date" => $request->subscriptiondate,
@@ -81,7 +92,17 @@ class TeamsController extends Controller
     public function update_team(Request $request)
     {
         $team = Team::findOrFail($request->id);
-        $partner = User::where('user_code', '=', $request->player2Code)->first();
+        $partner = User::where('user_code', '=', $request->player2Code)->firstOrFail();
+
+        //Verificar se parceiro esta numa equipa do mesmo torneio
+        $isPlayer2OnAnotherTeam = Team::where([['player1_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
+        $isPlayer2OnAnotherTeamid2 = Team::where([['player2_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
+
+        if ($isPlayer2OnAnotherTeam != null || $isPlayer2OnAnotherTeamid2 != null) {
+            return response()->json([
+                'message' => 'Parceiro ja esta inscrito noutra equipa no mesmo torneio',
+            ], 400);
+        }
 
         if (isset($request->name)){$team->name= $request->name;}
         if (isset($request->subscriptiondate)){$team->subscription_date= $request->subscriptiondate;}
@@ -109,8 +130,8 @@ class TeamsController extends Controller
             ['tournament_id', '=', $request->tournamentid]])->first();
         }
 
-        $httpMessage = ($player1 === null && $player2 === null) ? 'Não esta numa equipa' : 'Esta numa equipa';
-        $httpCode = ($player1 === null && $player2 === null) ? 400 : 200;
+        $httpMessage = ($player1 == null && $player2 == null) ? 'Não esta numa equipa' : 'Esta numa equipa';
+        $httpCode = ($player1 == null && $player2 == null) ? 400 : 200;
 
         if($httpCode == 200 && isset($request->tournamentid))
         {
