@@ -127,6 +127,11 @@ class TeamsController extends Controller
     public function get_teams(Request $request)
     {
         $teams = Team::where('tournament_id', $request->tournament_id)->get();
+        foreach($teams as $team)
+        {
+            $team->player1_id = User::where('id', '=', $team->player1_id)->firstOrFail();
+            $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail(); 
+        }
         return $teams;
     }
 }
