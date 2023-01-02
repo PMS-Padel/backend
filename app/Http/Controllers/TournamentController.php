@@ -58,6 +58,7 @@ class TournamentController extends Controller
     public function get_tournament($id)
     {
         $tournament = Tournament::findOrFail($id);
+        $tournament->admin = User::where('id', '=', $tournament->user_id)->firstOrFail();
         return $tournament;
     }
     public function update_tournament(Request $request)
@@ -110,7 +111,7 @@ class TournamentController extends Controller
                 $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail(); 
             }
         }
-        
+
         return $data;
     }
 
