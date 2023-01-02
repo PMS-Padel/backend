@@ -81,11 +81,19 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $user = User::findOrFail($user->id);
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => __('auth.wrong_format'),
-            ], 400);
+        if(isset($request->password))
+        {
+            $user = Auth::user();
+            $user = User::findOrFail($user->id);
+            if (!Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'message' => __('auth.wrong_format'),
+                ], 400);
+            }
+        }
+        else
+        {
+            $user = User::findOrFail($request->id);
         }
 
         if (isset($request->name)){$user->name= $request->name;}
@@ -94,6 +102,7 @@ class UserController extends Controller
         if (isset($request->gender )){$user->gender= $request->gender;}
         if (isset($request->phone_number)){$user->phone_number= $request->phone_number;}
         if (isset($request->birth_date)){$user->birth_date= $request->birth_date;}
+        if (isset($request->level)){$user->level= $request->level;}
     
         
         $user->save();
@@ -103,9 +112,9 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function get_user_by_code(Request $request)
+    public function get_user_by_code($userCode)
     {
-        $partner = User::where('user_code', '=', $request->user_code)->firstOrFail();
+        $partner = User::where('user_code', '=', $userCode)->firstOrFail();
         return $partner;
     }
 

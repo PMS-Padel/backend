@@ -34,7 +34,7 @@ class TeamsController extends Controller
             "player1_id" => $request->player1id,
             "player2_id" => $request->player2id,
             "tournament_id" => $request->tournamentid,
-            "payed"=> 'false'
+            "payed"=> $request->payed,
         ]);
 
         //$user->sendEmailVerificationNotification();
@@ -80,7 +80,7 @@ class TeamsController extends Controller
             "player1_id" => $player1->id,
             "player2_id" => $player2->id,
             "tournament_id" => $request->tournamentid,
-            "payed"=> 'false'
+            "payed"=> $request->payed,
         ]);
 
         //$user->sendEmailVerificationNotification();
@@ -92,16 +92,19 @@ class TeamsController extends Controller
     public function update_team(Request $request)
     {
         $team = Team::findOrFail($request->id);
-        $partner = User::where('user_code', '=', $request->player2Code)->firstOrFail();
+        if (isset($request->player2Code))
+        {
+            $partner = User::where('user_code', '=', $request->player2Code)->firstOrFail();
 
-        //Verificar se parceiro esta numa equipa do mesmo torneio
-        $isPlayer2OnAnotherTeam = Team::where([['player1_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
-        $isPlayer2OnAnotherTeamid2 = Team::where([['player2_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
+            //Verificar se parceiro esta numa equipa do mesmo torneio
+            $isPlayer2OnAnotherTeam = Team::where([['player1_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
+            $isPlayer2OnAnotherTeamid2 = Team::where([['player2_id', '=', $partner->id],['tournament_id', '=', $request->tournamentid]])->first();
 
-        if ($isPlayer2OnAnotherTeam != null || $isPlayer2OnAnotherTeamid2 != null) {
-            return response()->json([
-                'message' => 'Parceiro ja esta inscrito noutra equipa no mesmo torneio',
-            ], 400);
+            if ($isPlayer2OnAnotherTeam != null || $isPlayer2OnAnotherTeamid2 != null) {
+                return response()->json([
+                    'message' => 'Parceiro ja esta inscrito noutra equipa no mesmo torneio',
+                ], 400);
+            }
         }
 
         if (isset($request->name)){$team->name= $request->name;}
@@ -154,5 +157,15 @@ class TeamsController extends Controller
             $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail(); 
         }
         return $teams;
+    }
+
+    public function remove_team(Request $request)
+    {
+        $team = Team::findOrFail($request->id);
+        $team->delete();
+
+        return response()->json([
+            'message' => 'Equipa removida com sucesso',
+        ], 200);
     }
 }

@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('update', [UserController::class, 'update']);
     Route::post('logout', [UserController::class, 'logout']);
-    Route::post('getByCode', [UserController::class, 'get_user_by_code']);
+    Route::get('getByCode/{userCode}', [UserController::class, 'get_user_by_code']);
 
     //**********TORNEIOS********/
     Route::post('createtournament', [TournamentController::class, 'create_tournament']);
@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('updateteam', [TeamsController::class, 'update_team']);
     Route::post('setpayed', [TeamsController::class, 'set_payed']);
     Route::post('isteammate', [TeamsController::class, 'is_teammate']);
+    Route::post('deleteTeam', [TeamsController::class, 'remove_team']);
 });
 
 Route::post('login', [UserController::class, 'login']);
