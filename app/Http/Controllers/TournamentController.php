@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tournament;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -100,6 +101,16 @@ class TournamentController extends Controller
     public function get_tournaments(Request $request)
     {
         $data = Tournament::all();
+        foreach($data as $tournament)
+        {
+            $tournament->teams = Team::where('tournament_id', $tournament->id)->get();
+            foreach($tournament->teams as $team)
+            {
+                $team->player1_id = User::where('id', '=', $team->player1_id)->firstOrFail();
+                $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail(); 
+            }
+        }
+        
         return $data;
     }
 
