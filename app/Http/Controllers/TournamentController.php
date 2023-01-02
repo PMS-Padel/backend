@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -114,5 +115,18 @@ class TournamentController extends Controller
         return response()->json([
             'message' => 'Torneio modificado',
         ], 200);
-     }
+    }
+
+    public function remove_tourney(Request $request)
+    {
+        $tourney = Tournament::findOrFail($request->id);
+        $teams = Team::where('tournament_id', '=', $request->id);
+
+        $teams->delete();
+        $tourney->delete();
+
+        return response()->json([
+            'message' => 'Torneio removido com sucesso',
+        ], 200);
+    }
 }
