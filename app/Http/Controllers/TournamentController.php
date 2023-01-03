@@ -44,6 +44,8 @@ class TournamentController extends Controller
             "location" => $request->location,
             "price" => $request->price,
             "max_players" => $request->maxplayers,
+            "seguro" => $request->insurance,
+            "user_id" => $request->userid,
         ]);
 
         //$user->sendEmailVerificationNotification();
