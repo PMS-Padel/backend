@@ -14,8 +14,8 @@ class Campos extends Model
         'start_at',
         'team_id1',
         'team_id2',
-        'team1Points',
-        'team2Points'
+        'team1_points',
+        'team2_points'
         //'Availability', ?
         
        ];
