@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('setpayed', [TeamsController::class, 'set_payed']);
     Route::post('isteammate', [TeamsController::class, 'is_teammate']);
     Route::post('deleteTeam', [TeamsController::class, 'remove_team']);
+    /***********RESULTADOS**********/
+    Route::post('create_availability', [CamposDisponibilidade::class, 'create_availability']);
 });
 
 Route::post('login', [UserController::class, 'login']);
