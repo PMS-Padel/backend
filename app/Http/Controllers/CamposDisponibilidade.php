@@ -17,7 +17,8 @@ class CamposDisponibilidade extends Controller
             'team_id1' => 'nullable',
             'team_id2' => 'nullable',
             'team1_points' => 'nullable',
-            'team2_points' => 'nullable'
+            'team2_points' => 'nullable',
+            'winner_id'=> 'nullable'
         ]);
 
         if ($validation->fails()) {
@@ -34,6 +35,7 @@ class CamposDisponibilidade extends Controller
             "team_id2" => $request->team_id2,
             "team1_points" => $request->team1_points,
             "team2_points" => $request->team2_points,
+            "winner_id" => $request->winner_id,
         ]);
         
         return response()->json([
@@ -52,6 +54,7 @@ class CamposDisponibilidade extends Controller
         if (isset($request->team_id2 )){$campos->team_id2= $request->team_id2;}
         if (isset($request->team1_points )){$campos->team1Points= $request->team1_points;}
         if (isset($request->team2_points )){$campos->team2Points= $request->team2_points;}
+        if (isset($request->winner_id )){$campos->team2Points= $request->winner_id;}
 
         $campos->save();
         return response()->json([

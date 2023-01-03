@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger("team_id2")->nullable();
             $table->unsignedBigInteger("team1_points")->nullable();
             $table->unsignedBigInteger("team2_points")->nullable();
+            $table->unsignedBigInteger("winner_id")->nullable();
             $table->foreign('Campo_id')->references('id')->on('courts'); 
         });
     }
