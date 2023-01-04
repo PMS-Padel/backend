@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('Game', function (Blueprint $table) {
+        Schema::create('Games', function (Blueprint $table) {
             $table->unsignedBigInteger('Campo_id')->unique();
             $table->date('start_at')->unique();
             $table->date('day')->nullable();

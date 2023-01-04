@@ -13,8 +13,8 @@ class GameController extends Controller
         
         $validation = Validator::make($request->all(), [
             'Campo_id' => 'required',
-            'start_at' => 'date'|'required',
-            'day' => 'date'|'required',
+            'start_at' => 'date',
+            'day' => 'date',
             'team_id1' => 'nullable',
             'team_id2' => 'nullable',
             'team1_points' => 'nullable',

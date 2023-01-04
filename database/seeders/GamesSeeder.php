@@ -19,6 +19,8 @@ class GamesSeeder extends Seeder
         'Campo_id' =>  1,
         'start_at' => 1,
         'day'=> 1,
+        'updated_at'=> '2023-01-04 10:57:13',
+        'created_at'=> '2023-01-04 10:57:13',
         ]);
     }
 }
