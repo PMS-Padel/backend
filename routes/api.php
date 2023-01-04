@@ -41,7 +41,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('isteammate', [TeamsController::class, 'is_teammate']);
     Route::post('deleteTeam', [TeamsController::class, 'remove_team']);
     /***********RESULTADOS**********/
-    Route::post('create_availability', [CamposDisponibilidade::class, 'create_availability']);
+    Route::post('createavailability', [CamposDisponibilidade::class, 'create_availability']);
+
+    /***********GAMES**********/
+    Route::post('creategame', [GameController::class, 'create_game']);
+    Route::post('updategame', [GameController::class, 'update_game']);
+
 });
 
 Route::post('login', [UserController::class, 'login']);
