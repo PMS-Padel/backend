@@ -92,6 +92,9 @@ class TournamentController extends Controller
         if (isset($request->insurance)) {
             $tournament->seguro = $request->insurance;
         }
+        if (isset($request->file_url)) {
+            $tournament->file_url = $request->file_url;
+        }
 
 
         $tournament->save();
