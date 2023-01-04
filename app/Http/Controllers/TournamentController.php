@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Games;
 use App\Models\Tournament;
 use App\Models\Team;
 use App\Models\User;
@@ -16,8 +17,8 @@ class TournamentController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'string',
-            'init_date' => 'date'|'required',
-            'end_date' => 'date'|'required',
+            'init_date' => 'date' | 'required',
+            'end_date' => 'date' | 'required',
             'location' => 'required',
             'price' => 'numeric',
             'maxplayers' => 'integer',
@@ -34,7 +35,7 @@ class TournamentController extends Controller
             ], 400);
         }
 
-        $tournament = Tournament::create([
+        Tournament::create([
             "name" => $request->name,
             "tournament_type_id" => $request->tournamenttype,
             "init_date" => $request->initdate,
@@ -58,7 +59,7 @@ class TournamentController extends Controller
     public function get_tournament($id)
     {
         $tournament = Tournament::findOrFail($id);
-        $tournament->admin = User::where('id', '=', $tournament->user_id)->firstOrFail();
+        $tournament->admin = User::where('id', $tournament->user_id)->firstOrFail();
         return $tournament;
     }
     public function update_tournament(Request $request)
@@ -96,7 +97,6 @@ class TournamentController extends Controller
             $tournament->file_url = $request->file_url;
         }
 
-
         $tournament->save();
 
         return response()->json([
@@ -106,28 +106,26 @@ class TournamentController extends Controller
     public function get_tournaments(Request $request)
     {
         $data = Tournament::all();
-        foreach($data as $tournament)
-        {
+        foreach ($data as $tournament) {
             $tournament->teams = Team::where('tournament_id', $tournament->id)->get();
-            foreach($tournament->teams as $team)
-            {
+            foreach ($tournament->teams as $team) {
                 $team->player1_id = User::where('id', '=', $team->player1_id)->firstOrFail();
-                $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail(); 
+                $team->player2_id = User::where('id', '=', $team->player2_id)->firstOrFail();
             }
         }
 
         return $data;
     }
 
-    public function update_TournamentImage(Request $request) {
-        
+    public function update_TournamentImage(Request $request)
+    {
+
         $tournament = Tournament::findOrFail($request->id);
 
-        $file = $request->file('image');
         $tournament->file_url = $request->file('image')->store('images');
 
         $tournament->save();
-        
+
         return response()->json([
             'message' => 'Torneio modificado',
         ], 200);
@@ -144,5 +142,25 @@ class TournamentController extends Controller
         return response()->json([
             'message' => 'Torneio removido com sucesso',
         ], 200);
+    }
+
+    public function getTournamentGames(Request $request, $id)
+    {
+        $games = Games::where('tourney_id',  $id)->get();
+
+        $res = array();
+        foreach ($games as $key => $game) {
+            $team1 =  Team::findOrFail($game->team_id1);
+            $team1->player1 = User::findOrFail($team1->player1_id);
+            $team1->player2 = User::findOrFail($team1->player2_id);
+            $game->team1 = $team1;
+            $team2 =  Team::findOrFail($game->team_id2);
+            $team2->player1 = User::findOrFail($team2->player1_id);
+            $team2->player2 = User::findOrFail($team2->player2_id);
+            $game->team2 = $team2;
+            array_push($res, $game);
+        }
+
+        return $res;
     }
 }

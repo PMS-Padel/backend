@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('creategame', [GameController::class, 'create_game']);
     Route::post('updategame', [GameController::class, 'update_game']);
 
+    Route::get('get-tournament-games/{id}', [TournamentController::class, 'getTournamentGames']);
 });
 
 Route::post('login', [UserController::class, 'login']);
@@ -63,3 +64,4 @@ Route::get('gettournaments', [TournamentController::class, 'get_tournaments']);
 Route::get('gettournament/{id}', [TournamentController::class, 'get_tournament']);
 
 Route::get('getteams/{tournament_id}', [TeamsController::class, 'get_teams']);
+
