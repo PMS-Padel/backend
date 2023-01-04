@@ -18,8 +18,8 @@ class TournamentSeeder extends Seeder
     {
         Tournament::create([
             'name' => 'primeiro',
-            'init_date' => Carbon::now()->subDays(5),
-            'end_date' => Carbon::now()->subDays(20),
+            'init_date' => Carbon::now()->addDays(5),
+            'end_date' => Carbon::now()->addDays(20),
             'max_players' => 10,
             'tournament_type_id' => 2,
             'seguro' => 'Atual',
@@ -29,8 +29,8 @@ class TournamentSeeder extends Seeder
         ]);
         Tournament::create([
             'name' => 'segundo',
-            'init_date' => Carbon::now()->subDays(-1),
-            'end_date' => Carbon::now()->subDays(7),
+            'init_date' => Carbon::now()->subDays(1),
+            'end_date' => Carbon::now()->addDays(7),
             'max_players' => 10,
             'tournament_type_id' => 2,
             'seguro' => 'Atual',
@@ -40,8 +40,8 @@ class TournamentSeeder extends Seeder
         ]);
         Tournament::create([
             'name' => 'terceiro',
-            'init_date' => Carbon::now()->subDays(-20),
-            'end_date' => Carbon::now()->subDays(-5),
+            'init_date' => Carbon::now()->subDays(20),
+            'end_date' => Carbon::now()->subDays(5),
             'max_players' => 10,
             'tournament_type_id' => 2,
             'seguro' => 'Atual',
