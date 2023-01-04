@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tourney_id')->unique();
-            $table->unsignedBigInteger('campo_id')->unique();
+            $table->unsignedBigInteger('tourney_id');
+            $table->unsignedBigInteger('campo_id')->nullable();
             $table->timestamp('start_at')->nullable();
             $table->unsignedBigInteger("team_id1")->nullable();
             $table->unsignedBigInteger("team_id2")->nullable();
