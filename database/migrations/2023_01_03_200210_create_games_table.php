@@ -8,18 +8,24 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('Games', function (Blueprint $table) {
-            $table->unsignedBigInteger('Campo_id')->unique();
-            $table->date('start_at')->unique();
-            $table->date('day')->nullable();
+        Schema::create('games', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('tourney_id')->unique();
+            $table->unsignedBigInteger('campo_id')->unique();
+            $table->timestamp('start_at')->nullable();
             $table->unsignedBigInteger("team_id1")->nullable();
             $table->unsignedBigInteger("team_id2")->nullable();
             $table->unsignedBigInteger("team1_points")->nullable();
             $table->unsignedBigInteger("team2_points")->nullable();
             $table->unsignedBigInteger("winner_id")->nullable();
-            $table->unsignedBigInteger("team1_name")->nullable();
-            $table->unsignedBigInteger("team2_name")->nullable();
-            $table->foreign('Campo_id')->references('id')->on('courts'); 
+            $table->timestamps();
+
+            $table->foreign('campo_id')->references('id')->on('courts'); 
+            $table->foreign('tourney_id')->references('id')->on('tournaments');
+            $table->foreign('team_id1')->references('id')->on('teams');
+            $table->foreign('team_id2')->references('id')->on('teams');
+            $table->foreign('winner_id')->references('id')->on('teams');
+            $table->softDeletes();
         });
     }
      /**
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Game');
+        Schema::dropIfExists('games');
     }
 };

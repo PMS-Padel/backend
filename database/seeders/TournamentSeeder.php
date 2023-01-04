@@ -19,10 +19,36 @@ class TournamentSeeder extends Seeder
         Tournament::create([
             'name' => 'primeiro',
             'init_date' => Carbon::now()->subDays(5),
-            'end_date' => Carbon::now(),
+            'end_date' => Carbon::now()->subDays(20),
             'max_players' => 10,
-            'tournament_type_id' => 3,
+            'tournament_type_id' => 2,
             'seguro' => 'Atual',
+            'user_id'=> 3,
+            'file_url'=>'https://www02.madeira-edu.pt/Portals/3/Images/Noticias/desporto_torneiopadel.jpg',
+            'location'=>'localidade1',
         ]);
+        Tournament::create([
+            'name' => 'segundo',
+            'init_date' => Carbon::now()->subDays(-1),
+            'end_date' => Carbon::now()->subDays(7),
+            'max_players' => 10,
+            'tournament_type_id' => 2,
+            'seguro' => 'Atual',
+            'user_id'=> 3,
+            'file_url'=>'https://www02.madeira-edu.pt/Portals/3/Images/Noticias/desporto_torneiopadel.jpg',
+            'location'=>'localidade1',
+        ]);
+        Tournament::create([
+            'name' => 'terceiro',
+            'init_date' => Carbon::now()->subDays(-20),
+            'end_date' => Carbon::now()->subDays(-5),
+            'max_players' => 10,
+            'tournament_type_id' => 2,
+            'seguro' => 'Atual',
+            'user_id'=> 3,
+            'file_url'=>'https://www02.madeira-edu.pt/Portals/3/Images/Noticias/desporto_torneiopadel.jpg',
+            'location'=>'localidade1',
+        ]);
+
     }
 }
