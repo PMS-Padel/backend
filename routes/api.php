@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     /***********GAMES**********/
     Route::post('creategame', [GameController::class, 'create_game']);
     Route::post('updategame', [GameController::class, 'update_game']);
+    Route::post('deletegame', [GameController::class, 'delete_game']);
 });
 
 Route::post('login', [UserController::class, 'login']);

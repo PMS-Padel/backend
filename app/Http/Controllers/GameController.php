@@ -15,8 +15,7 @@ class GameController extends Controller
         $validation = Validator::make($request->all(), [
             'tourney_id' => 'required',
             'campo_id' => 'nullable',
-            'day' => 'string',
-            'hour' => 'string',
+            'start_at' => 'nullable',
             'team_id1' => 'nullable',
             'team_id2' => 'nullable',
             'team1_points' => 'nullable',
@@ -34,7 +33,7 @@ class GameController extends Controller
         Games::create([
             "tourney_id" => $request->tourney_id,
             'campo_id' => $request->campo_id,
-            "start_at" => $request->day . " " . $request->hour . ":00",
+            "start_at" => $request->start_at,
             "team_id1" => $request->team_id1,
             "team_id2" => $request->team_id2,
             "team1_points" => $request->team1_points,
@@ -82,6 +81,16 @@ class GameController extends Controller
         $game->save();
         return response()->json([
             'message' => 'Jogo actualizado com sucesso',
+        ], 200);
+    }
+
+    public function delete_game(Request $request)
+    {
+        $team = Games::findOrFail($request->id);
+        $team->delete();
+
+        return response()->json([
+            'message' => 'Jogo removido com sucesso',
         ], 200);
     }
 }
