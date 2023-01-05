@@ -69,13 +69,13 @@ class GameController extends Controller
             $game->team_id2 = $request->team_id2;
         }
         if (isset($request->team1_points)) {
-            $game->team1Points = $request->team1_points;
+            $game->team1_points = $request->team1_points;
         }
         if (isset($request->team2_points)) {
-            $game->team2Points = $request->team2_points;
+            $game->team2_points = $request->team2_points;
         }
         if (isset($request->winner_id)) {
-            $game->team2Points = $request->winner_id;
+            $game->winner_id = $request->winner_id;
         }
 
 

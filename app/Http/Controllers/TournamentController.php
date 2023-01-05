@@ -6,6 +6,7 @@ use App\Models\Games;
 use App\Models\Tournament;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Court;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -150,14 +151,16 @@ class TournamentController extends Controller
 
         $res = array();
         foreach ($games as $key => $game) {
-            $team1 =  Team::findOrFail($game->team_id1);
+            $team1 = Team::findOrFail($game->team_id1);
             $team1->player1 = User::findOrFail($team1->player1_id);
             $team1->player2 = User::findOrFail($team1->player2_id);
             $game->team1 = $team1;
-            $team2 =  Team::findOrFail($game->team_id2);
+            $team2 = Team::findOrFail($game->team_id2);
             $team2->player1 = User::findOrFail($team2->player1_id);
             $team2->player2 = User::findOrFail($team2->player2_id);
             $game->team2 = $team2;
+            $campo = Court::findOrFail($game->campo_id);
+            $game->campo = $campo;
             array_push($res, $game);
         }
 
