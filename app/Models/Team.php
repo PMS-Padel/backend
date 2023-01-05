@@ -13,7 +13,8 @@ class Team extends Model
         'subscription_date',
         'player1_id',
         'player2_id',
-        'payed'
+        'payed',
+        'tournament_id'
     ];
     public function players() 
     {

@@ -6,7 +6,7 @@ use App\Models\Tournament_type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class Tournament_typeSeeder extends Seeder
+class TournamentTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

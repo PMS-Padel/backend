@@ -18,6 +18,7 @@ class Tournament extends Model
         'price',
         'max_players',
         'tournament_type_id',
+        'user_id',
         'file_url',
         'seguro',
     ];
