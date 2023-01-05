@@ -106,17 +106,6 @@ class UserSeeder extends Seeder
             'birth_date' => null,
         ]);
         User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.pt',
-            'password' => Hash::make('123'),
-            'user_code' => '1',
-            'gender' => 'M',
-            'role'=> 'admin',
-            'level' => 2,
-            'phone_number' => 912663014,
-            'birth_date' => null,
-        ]);
-        User::create([
             'name' => 'João Gouveia',
             'email' => 'jonajfg@hotmail.com',
             'password' => Hash::make('123ABCabc?'),
@@ -159,6 +148,18 @@ class UserSeeder extends Seeder
             'role'=> 'player',
             'level' => 2,
             'phone_number' => null,
+            'birth_date' => null,
+        ]);
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.pt',
+            'password' => Hash::make('123'),
+            'user_code' => '1',
+            'gender' => 'M',
+            'role'=> 'admin',
+            'level' => 2,
+            'phone_number' => 912663014,
             'birth_date' => null,
         ]);
     }

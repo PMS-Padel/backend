@@ -51,6 +51,7 @@ class TeamSeeder extends Seeder
         ]);
 
         //TORNEIO ID 4
+        //nivel 3
         Team::create([
             'name' => 'Equipa1',
             'subscription_date' => Carbon::now()->subDays(90),
@@ -59,6 +60,7 @@ class TeamSeeder extends Seeder
             'tournament_id' => 4,
             'payed' => "true",
         ]);
+        //nivel 2
         Team::create([
             'name' => 'Equipa2',
             'subscription_date' => Carbon::now()->subDays(83),
@@ -67,6 +69,7 @@ class TeamSeeder extends Seeder
             'tournament_id' => 4,
             'payed' => "true",
         ]);
+        //4/nada
         Team::create([
             'name' => 'Equipa3',
             'subscription_date' => Carbon::now()->subDays(83),
@@ -75,6 +78,7 @@ class TeamSeeder extends Seeder
             'tournament_id' => 4,
             'payed' => "true",
         ]);
+        //2/nada
         Team::create([
             'name' => 'Equipa4',
             'subscription_date' => Carbon::now()->subDays(81),
@@ -83,6 +87,7 @@ class TeamSeeder extends Seeder
             'tournament_id' => 4,
             'payed' => "true",
         ]);
+        //2
         Team::create([
             'name' => 'Equipa5',
             'subscription_date' => Carbon::now()->subDays(81),
